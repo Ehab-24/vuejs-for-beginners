@@ -6,7 +6,7 @@ import { computed } from 'vue';
 import { defineProps, defineEmits } from 'vue';
 
 // Define the events we want to emit
-const emit = defineEmits(['start', 'baked']);
+const emit = defineEmits(['start', 'finish']);
 
 const props = defineProps({
     // The props we want to accept
@@ -35,7 +35,7 @@ const bakeACake = () => {
         isBusy.value = false;
         console.log(`Oven: ${props.food} is ready!`);
 // ! Emit an event when the cake is ready
-        emit('baked');
+        emit('finish');
     }, props.duration);
 };
 
