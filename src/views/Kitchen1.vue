@@ -1,6 +1,7 @@
 <script setup>
 import Oven from '../components/Oven.vue';
-import { ref } from 'vue';
+
+import getCurrentKitchenItems from '../composables/getCurrentKitchenItems';
 
 const ovens = [
     {
@@ -20,14 +21,8 @@ const ovens = [
     }
 ];
 
-const currenltyBaking = ref([]);
+const { currentItems, addToCurrentItems, removeFromCurrentItems } = getCurrentKitchenItems();
 
-const addToCurrentlyBaking = (food) => {
-    currenltyBaking.value.push(food);
-};
-const removeFromCrrenltyBaking = (food) => {
-    currenltyBaking.value = currenltyBaking.value.filter((f) => f !== food);
-};
 </script>
 
 <template>
@@ -37,12 +32,12 @@ const removeFromCrrenltyBaking = (food) => {
         </h1>
 
         <div class="flex gap-4 my-4">
-            <h3 v-for="item in currenltyBaking" :key="item">{{ item }}</h3>
+            <h3 v-for="item in currentItems" :key="item">{{ item }}</h3>
         </div>
 
         <div class="grid grid-cols-2 gap-8">
             <Oven v-for="oven in ovens" :key="oven.id" :food="oven.food" :duration="oven.duration"
-            @start="addToCurrentlyBaking(oven.food)" @baked="removeFromCrrenltyBaking(oven.food)" />
+            @start="addToCurrentItems(oven.food)" @baked="removeFromCurrentItems(oven.food)" />
         </div>
     </div>
 </template>

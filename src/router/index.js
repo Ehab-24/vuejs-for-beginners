@@ -8,10 +8,12 @@ import Kitchen3 from "../views/Kitchen3.vue";
 const routes = [
     {
         path: "/",
+        name: "Kitchen1",
         component: Kitchen1,
     },
     {
         path: "/kitchen2",
+        name: "Kitchen2",
         component: Kitchen2,
     },
     {
